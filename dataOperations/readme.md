@@ -2,9 +2,8 @@
 
 This directory contains all resources related to data processing and loading. It includes scripts, notebooks, and utilities for handling various data operations.
 
-## Contents
+## Contents dataOperations
 
-- **`dataOperations/`** 
 - **`parseISW.ipynb`** 
 
 ## Overview
