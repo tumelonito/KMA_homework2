@@ -19,6 +19,9 @@ By aggregating and analyzing open-source intelligence such as reports from the [
 - 🧩 **Modular Structure**: Easily extensible architecture — new sources, models, or logic modules can be added without significant restructuring.
 - ☁️ **SaaS-Friendly Deployment**: Designed to run on modern cloud platforms using `uWSGI`, `Docker`, and optionally wrapped with `Flask` or `FastAPI` for API access.
 
+  ![image](https://github.com/user-attachments/assets/d1ba3243-9b04-4808-9b17-e8d3483a16d2)
+
+
 ## Project Structure
 
 ```
