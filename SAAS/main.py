@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import subprocess
 import datetime as dt
+import sqlite3
 
 
 def run_notebook(path):
@@ -71,3 +72,33 @@ for city in regions["center_city_en"]:
 file_path = 'data/prediction.json'
 with open(file_path, 'w', encoding='utf-8') as f:
     json.dump(res, f, indent=4, ensure_ascii=False)
+
+conn = sqlite3.connect('data/predictions.db')
+cursor = conn.cursor()
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS forecasts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        city TEXT,
+        hour TEXT,
+        prediction INTEGER,
+        last_model_train_time TEXT
+    )
+''')
+
+for region_dict in res["regions_forecast"]:
+    for city, forecast in region_dict.items():
+        for hour, value in forecast.items():
+            cursor.execute('''
+                INSERT INTO forecasts (city, hour, prediction, last_model_train_time)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (
+                city,
+                hour,
+                int(value),
+                res["last_model_train_time"],
+                res["last_prediction_time"]
+            ))
+
+conn.commit()
+conn.close()
